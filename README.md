@@ -9,9 +9,7 @@ To get your App Secret Key:
 1. Navigate to Branding section
 1. Note your API key, located in the App Secret Key field
 
-This PHP package is automatically generated:
-
-- API version: 1.0.0
+- API version: 1.0.1
 
 ## Requirements
 
@@ -74,10 +72,56 @@ $apiInstance = new GuestNetworks\API\AnalyticsApi(
     new GuzzleHttp\Client(),
     $config
 );
+$start = new \DateTime("2013-10-20"); // \DateTime | The start date format should be YYYY-MM-DD. Only required if \"period\" is \"custom\".
+$end = new \DateTime("2013-10-20"); // \DateTime | The end date format should be YYYY-MM-DD. Only required if \"period\" is \"custom\".
+$location_id = array(56); // int[] | A comma-separated list of location IDs.
+$campaign_id = array(56); // int[] | A comma-separated list of campaign IDs.
+$period = "last7"; // string | The period to query.
+
+try {
+    $apiInstance->averageBandwidthUsage($start, $end, $location_id, $campaign_id, $period);
+} catch (Exception $e) {
+    echo 'Exception when calling AnalyticsApi->averageBandwidthUsage: ', $e->getMessage(), PHP_EOL;
+}
+
+// Configure API key authorization: apiKey
+$config = GuestNetworks\Configuration::getDefaultConfiguration()->setApiKey('identifier', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = GuestNetworks\Configuration::getDefaultConfiguration()->setApiKeyPrefix('identifier', 'Bearer');
+
+$apiInstance = new GuestNetworks\API\AnalyticsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$start = new \DateTime("2013-10-20"); // \DateTime | The start date format should be YYYY-MM-DD. Only required if \"period\" is \"custom\".
+$end = new \DateTime("2013-10-20"); // \DateTime | The end date format should be YYYY-MM-DD. Only required if \"period\" is \"custom\".
+$location_id = array(56); // int[] | A comma-separated list of location IDs.
+$campaign_id = array(56); // int[] | A comma-separated list of campaign IDs.
+$period = "last7"; // string | The period to query.
+
+try {
+    $apiInstance->averageSessionTime($start, $end, $location_id, $campaign_id, $period);
+} catch (Exception $e) {
+    echo 'Exception when calling AnalyticsApi->averageSessionTime: ', $e->getMessage(), PHP_EOL;
+}
+
+// Configure API key authorization: apiKey
+$config = GuestNetworks\Configuration::getDefaultConfiguration()->setApiKey('identifier', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = GuestNetworks\Configuration::getDefaultConfiguration()->setApiKeyPrefix('identifier', 'Bearer');
+
+$apiInstance = new GuestNetworks\API\AnalyticsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
 $location_id = array(56); // int[] | A comma-separated list of location IDs.
 $start_date = new \DateTime("2013-10-20"); // \DateTime | The start date format should be YYYY-MM-DD
 $end_date = new \DateTime("2013-10-20"); // \DateTime | The end date format should be YYYY-MM-DD
-$agg = "agg_example"; // string | The interval to group results by
+$agg = "DAY"; // string | The interval to group results by
 
 try {
     $apiInstance->getSocialLogins($location_id, $start_date, $end_date, $agg);
@@ -99,7 +143,7 @@ $apiInstance = new GuestNetworks\API\AnalyticsApi(
 $location_id = array(56); // int[] | A comma-separated list of location IDs.
 $start_date = new \DateTime("2013-10-20"); // \DateTime | The start date format should be YYYY-MM-DD
 $end_date = new \DateTime("2013-10-20"); // \DateTime | The end date format should be YYYY-MM-DD
-$agg = "agg_example"; // string | The interval to group results by
+$agg = "DAY"; // string | The interval to group results by
 
 try {
     $apiInstance->getVisits($location_id, $start_date, $end_date, $agg);
@@ -115,6 +159,8 @@ All URIs are relative to *https://www.mywifi.io/api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AnalyticsApi* | [**averageBandwidthUsage**](docs/Api/AnalyticsApi.md#averagebandwidthusage) | **GET** /average-bandwidth-used | Retrieve average bandwidth used for a Location in bytes
+*AnalyticsApi* | [**averageSessionTime**](docs/Api/AnalyticsApi.md#averagesessiontime) | **GET** /average-session-time | Retrieve average visit duration for a Location in seconds
 *AnalyticsApi* | [**getSocialLogins**](docs/Api/AnalyticsApi.md#getsociallogins) | **GET** /get-social-logins | Retrieve aggregated guest logins for a Location
 *AnalyticsApi* | [**getVisits**](docs/Api/AnalyticsApi.md#getvisits) | **GET** /get-visits | Retrieve aggregated visit data for a Location
 *CampaignsApi* | [**campaignList**](docs/Api/CampaignsApi.md#campaignlist) | **GET** /campaign-list | Retrieve list of all Campaigns
@@ -137,6 +183,7 @@ Class | Method | HTTP request | Description
 *LocationsApi* | [**updateLocationOptions**](docs/Api/LocationsApi.md#updatelocationoptions) | **POST** /set-session-and-bandwidth-info | Update Location Options / Settings [RADIUS Attributes]
 *SubUsersApi* | [**createSubUser**](docs/Api/SubUsersApi.md#createsubuser) | **POST** /create-sub-user | Create a SubUser
 *SubUsersApi* | [**subuserList**](docs/Api/SubUsersApi.md#subuserlist) | **GET** /subuser-list | Retrieve SubUser Accounts for this Parent User Account
+*SubUsersApi* | [**subuserSSO**](docs/Api/SubUsersApi.md#subusersso) | **GET** /get-sub-user-sso | Retrieve SSO sign-in link for subuser
 
 ## Documentation For Models
 
@@ -150,8 +197,17 @@ Class | Method | HTTP request | Description
  - [LocationOption](docs/Model/LocationOption.md)
  - [SubUser](docs/Model/SubUser.md)
 
+## Documentation For Authorization
+
+
 ## apiKey
 
 - **Type**: API key
 - **API key parameter name**: identifier
 - **Location**: HTTP header
+
+
+## Author
+
+
+
